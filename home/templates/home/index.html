@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>CNA APP</title>
+    <title>CNAPZ</title>
     {% load static %}
     <link rel="shortcut icon" type="image/ico" href="{% static "home/favicon.ico" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "home/style.css" %}">
@@ -9,14 +9,15 @@
   <body>
     <div class="wrapper">
       <div class="container">
-        <h1>CNA Pay</h1>
+        <h1>CNAPZ</h1>
         
-        <form class="form">
-          <input type="text" placeholder="Username" id="username" onkeypress="checkUsername()" onkeydown="checkUsername()" onkeyup="checkUsername()">
-          <input type="password" placeholder="Password" id="password">
-          <button type="submit" id="login-button">Get PDF!</button>
-        </form>
-        <span id="error"></span>
+        <div id="options" class="options">
+          <button onclick="goToApp('cna_pay')" onmouseout="handleAppHover('')" onmouseover="handleAppHover('cna_pay')">CNA Pay</button>
+          <button onclick="goToApp('cna_up')" onmouseout="handleAppHover('')" onmouseover="handleAppHover('cna_up')">CNA UP</button>
+          <button onclick="goToApp('cna_saveMoney')" onmouseout="handleAppHover('')" onmouseover="handleAppHover('cna_saveMoney')">CNA SaveMoney</button>
+        </div>
+        <div id="discriptions" class="discriptions">
+        </div>
         <span style="position: absolute; right:0%; bottom:0%; color: #CCDDFF;">sh1zuku</span>
       </div>
       <ul class="bg-bubbles">
@@ -35,27 +36,36 @@
     </div>
 
     <script>
-      console.log('看屁，喝')
-      const checkUsername = () => {
-        const userName = document.querySelector('#username')
-        const login = document.querySelector("#login-button")
-        const error = document.querySelector("#error") 
-        if (username.value.match(/\D/)){
-          error.innerHTML='Numbers only!!'
-          login.setAttribute("disabled",true)
-          login.setAttribute("style","background-color: #AAAAAA; color: #556B2F;")
-        } else {
-          error.innerHTML=''
-          login.removeAttribute("disabled")
-          login.removeAttribute("style")
+      const goToApp = (app) => {
+        window.location.assign(app)
+      }
+      const handleAppHover = (app) => {
+        const discription = document.querySelector('#discriptions');
+        switch (app) {
+          case 'cna_pay':
+            discription.setAttribute('class','discriptions-hover')
+            discription.innerHTML = `
+            自動報薪水
+            <br/>
+            太多薪水需要報嗎?
+            賺錢需要這麼累嗎?
+            <br/>
+            填入時數，自動報薪水。`
+            break;
+          case 'cna_up':
+            discription.setAttribute('class','discriptions-hover')
+            discription.innerHTML = 'Todo~' ;
+            break;
+          case 'cna_saveMoney':
+            discription.setAttribute('class','discriptions-hover')
+            discription.innerHTML = 'Todo~' ;
+            break;  
+          default:
+            discription.setAttribute('class','discriptions')
+            discription.innerHTML = '';
+            break;
         }
       }
-      $("#login-button").click(function(event){
-        event.preventDefault();
-        if ($('username').)
-	      $('form').fadeOut(500);
-	      $('.wrapper').addClass('form-success');
-      });
     </script>
   </body>
 </html>

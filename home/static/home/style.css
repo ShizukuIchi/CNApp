@@ -64,57 +64,70 @@ body :-ms-input-placeholder {
   font-size: 40px;
   transition-duration: 1s;
   transition-timing-function: ease-in-put;
-  font-weight: 200;
+  font-weight: 500;
 }
-form {
+#options {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
   padding: 20px 0;
   position: relative;
   z-index: 2;
 }
-form input {
-  appearance: none;
+#options button {
   outline: 0;
   border: 1px solid rgba(255, 255, 255, 0.4);
-  background-color: rgba(255, 255, 255, 0.2);
-  width: 250px;
+  background: rgba(255, 255, 255, 0.87);
+  width: 180px;
+  border-radius: 3px;
+  padding: 10px 15px;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  color: #53e3a6;
+  transition-duration: 0.25s;
+  font-weight: 300;
+}
+#options button:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: white;
+}
+
+.discriptions {
+  position: relative;
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 3px;
   padding: 10px 15px;
   margin: 0 auto 10px auto;
   display: block;
-  text-align: center;
-  font-size: 18px;
-  color: white;
-  transition-duration: 0.25s;
-  font-weight: 300;
-}
-form input:hover {
-  background-color: rgba(255, 255, 255, 0.4);
-}
-form input:focus {
-  background-color: white;
-  width: 300px;
+  float: left;
+  font-size: 0px;
   color: #53e3a6;
-}
-form button {
-  appearance: none;
-  outline: 0;
-  background-color: white;
-  border: 0;
-  padding: 10px 15px;
-  color: #53e3a6;
-  border-radius: 3px;
-  width: 250px;
-  cursor: pointer;
-  font-size: 18px;
-  transition-duration: 0.25s;
-}
-form button:hover {
-  background-color: #f5f7f9;
+  transition-duration: .5s;  
+  width: 0%;
+  opacity: 0;
 }
 
-.button-error {
-  background-color: #DDDDDD;
+.discriptions-hover {
+  position: relative;
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.2);;
+  border-radius: 3px;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  float: left;
+  font-size: 18px;
+  color: white;
+  transition-duration: .5s;  
+  width: 0%;
+  opacity: 0;
+  width: 100%;
+  opacity: 100;
 }
+
 
 .bg-bubbles {
   position: absolute;
@@ -210,9 +223,4 @@ form button:hover {
   100% {
     transform: translateY(-700px) rotate(600deg);
   }
-}
-
-#error {
-  color: red;
-  font-weight: bold;
 }

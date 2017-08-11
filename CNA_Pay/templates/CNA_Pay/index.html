@@ -12,8 +12,8 @@
         <h1>CNA Pay</h1>
         
         <form class="form">
-          <input type="text" placeholder="Username" id="username" onkeypress="checkUsername()" onkeydown="checkUsername()" onkeyup="checkUsername()">
-          <input type="password" placeholder="Password" id="password">
+          <input type="text" placeholder="Username" id="username" onkeypress="checkUsername()" onkeydown="checkUsername()" onkeyup="checkUsername()" />
+          <input type="password" placeholder="Password" id="password" />
           <button type="submit" id="login-button">Get PDF!</button>
         </form>
         <span id="error"></span>
@@ -35,26 +35,31 @@
     </div>
 
     <script>
-      console.log('看屁，喝')
+      console.log('看屁，喝');
       const checkUsername = () => {
-        const userName = document.querySelector('#username')
-        const login = document.querySelector("#login-button")
+        const username = document.querySelector('#username');
+        const password = document.querySelector('#password');
+        const login = document.querySelector("#login-button");
         const error = document.querySelector("#error") 
         if (username.value.match(/\D/)){
-          error.innerHTML='Numbers only!!'
-          login.setAttribute("disabled",true)
-          login.setAttribute("style","background-color: #AAAAAA; color: #556B2F;")
+          error.innerHTML='Numbers only!!';
+          login.setAttribute("disabled",true);
+          login.setAttribute("style","background-color: #AAAAAA; color: #556B2F;");
         } else {
-          error.innerHTML=''
-          login.removeAttribute("disabled")
-          login.removeAttribute("style")
+          error.innerHTML='';
+          login.removeAttribute("disabled");
+          login.removeAttribute("style");
         }
       }
       $("#login-button").click(function(event){
         event.preventDefault();
-        if ($('username').)
-	      $('form').fadeOut(500);
-	      $('.wrapper').addClass('form-success');
+        if ('' === username.value || '' === password.value){
+          error.innerHTML = 'Please fill in something!';
+        } else {
+          error.innerHTML = '';
+          $('form').fadeOut(500);
+	        $('.wrapper').addClass('form-success');
+        }
       });
     </script>
   </body>
