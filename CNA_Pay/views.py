@@ -5,6 +5,3 @@ from django.http import HttpResponse
 
 def index(request):
     return render(request, 'CNA_Pay/index.html')
-
-def pay(request):
-    pass
