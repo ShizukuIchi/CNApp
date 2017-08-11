@@ -64,7 +64,7 @@ body :-ms-input-placeholder {
   font-size: 40px;
   transition-duration: 1s;
   transition-timing-function: ease-in-put;
-  font-weight: 500;
+  font-weight: 200;
 }
 form {
   padding: 20px 0;
