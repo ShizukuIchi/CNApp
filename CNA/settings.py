@@ -25,7 +25,7 @@ SECRET_KEY = '1a)tp1gftp-2p*d!2_5d8q_xw75nzivo=0(uwm32jya((*$t^3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.ccu.edu.tw']
 
 
 # Application definition
