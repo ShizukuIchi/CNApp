@@ -44,7 +44,7 @@
       console.log('看屁，喝');
       const error = document.querySelector("#error");
       const checkInput = () => {
-        if ($('input').eq(0).val().match(/\D/)){
+        if ($('input').eq(0).val().match(/(?!\.)\D/)){
           error.innerHTML='Numbers only!!';
           $('#login-button').attr("disabled");
           $('#login-button').attr("style","background-color: #AAAAAA; color: #556B2F;");
@@ -88,9 +88,12 @@
                 } else {
                   error.innerHTML = 'Wrong username or password!';
                 }
-              },1000)
+              },800)
             });
           }
+        } else {
+          $('.wrapper').addClass('form-success');
+          $('form').fadeOut(500);
         }
       });
     </script>

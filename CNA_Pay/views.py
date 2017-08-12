@@ -14,13 +14,13 @@ def login(request):
     payload = {}
     payload['staff_cd'] = str(request.POST.get("username", ""))
     payload['passwd'] = str(request.POST.get("password", ""))
-    return requester.login(payload)
+    return HttpResponse(requester.login(payload))
 
 def pay(request):
     thisYear = dating.getChineseThisYear()
 
     payMonth = str(request.POST.get("month", ""))
-    payHours = str(request.POST.get("hours", ""))
+    payHours = float(request.POST.get("hours", ""))
 
     holidays = dating.getThisMonthHolidaysFromFile(payMonth,'holidays.csv')
     payableDays = dating.getPayableDays(payMonth,holidays)

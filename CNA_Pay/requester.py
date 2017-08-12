@@ -52,7 +52,6 @@ def addHours(year,month,days,hours):
     'workin':u'宿網諮詢',
     'sid':''
     }
-    
     paidDays=[]
     while hours > 0:
         d = days[randint(0, len(days)-1)]

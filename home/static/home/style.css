@@ -76,6 +76,7 @@ body :-ms-input-placeholder {
   z-index: 2;
 }
 #options button {
+  cursor: pointer;
   outline: 0;
   border: 1px solid rgba(255, 255, 255, 0.4);
   background: rgba(255, 255, 255, 0.87);
