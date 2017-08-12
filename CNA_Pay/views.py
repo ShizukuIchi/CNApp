@@ -15,4 +15,4 @@ def login(request):
         return HttpResponse('404')
 
 def pay(request):
-    return HttpResponse('hours='+str(request.POST.get("hours", ""))+' month='+str(request.POST.get("month", "")))
+    return HttpResponse('username='+str(request.POST.get("username", ""))+' password='+str(request.POST.get("password", ""))+' hours='+str(request.POST.get("hours", ""))+' month='+str(request.POST.get("month", "")))

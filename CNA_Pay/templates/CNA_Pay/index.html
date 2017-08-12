@@ -77,6 +77,8 @@
                 $('form').fadeIn(500);
                 if (data === '200'){
                   $('form').attr('action','pay');
+                  $('form').append(`<input type="hidden" name="username" value="${$('#username').val()}"/>`);
+                  $('form').append(`<input type="hidden" name="password" value="${$('#password').val()}"/>`)
                   $('#username').attr({id:'hours', placeholder: 'Hours', name:'hours'}).val('');
                   $('#password').attr({type:'hidden', id:'month', name: 'month'}).val('1');
                   $('#login-button').html('Get PDF!');
