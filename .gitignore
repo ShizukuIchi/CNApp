@@ -1,3 +1,5 @@
 .vscode
 *.pdf
 *.pyc
+.env
+cna-pay

@@ -4,4 +4,15 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def index(request):
-    return render(request, 'CNA_Pay/index.html')
+    context = {}
+    context['months'] = range(1,13)
+    return render(request, 'CNA_Pay/index.html', context)
+
+def login(request):
+    if str(request.POST.get("username", "")) == '123' and str(request.POST.get("password", "")) == '123':
+        return HttpResponse('200')
+    else:
+        return HttpResponse('404')
+
+def pay(request):
+    return HttpResponse('hours='+str(request.POST.get("hours", ""))+' month'+str(request.POST.get("month", "")))

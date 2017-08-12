@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>報薪水２.0 颯爽登場吶!</title>
+    <title>報薪水２.0 颯爽登場!</title>
     {% load static %}
     <link rel="shortcut icon" type="image/ico" href="{% static "CNA_Pay/favicon.ico" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "CNA_Pay/style.css" %}">
@@ -11,10 +11,15 @@
       <div class="container">
         <h1>CNA Pay</h1>
         
-        <form class="form">
-          <input type="text" placeholder="Username" id="username" onkeypress="checkUsername()" onkeydown="checkUsername()" onkeyup="checkUsername()" />
-          <input type="password" placeholder="Password" id="password" />
-          <button type="submit" id="login-button">Get PDF!</button>
+        <form class="form" method="post">
+          {% csrf_token %}
+          <input type="text" placeholder="Username" id="username" name="username" onkeypress="checkUsername()" onkeydown="checkUsername()" onkeyup="checkUsername()" />
+          <input type="password" placeholder="Password" id="password" name="password"/>
+          <div id="monthSelector" >
+            <div class="arrowContainer"><div class="arrow"></div></div>
+            {% for i in months %}<label for='month'>{{ i }}</label>{% if not forloop.last %}|{% endif %}{% endfor %}
+          </div>
+          <button type="submit" id="login-button">Login</button>
         </form>
         <span id="error"></span>
         <span style="position: absolute; right:0%; bottom:0%; color: #CCDDFF;">sh1zuku</span>
@@ -36,29 +41,51 @@
 
     <script>
       console.log('看屁，喝');
+      const error = document.querySelector("#error");
       const checkUsername = () => {
-        const username = document.querySelector('#username');
-        const password = document.querySelector('#password');
-        const login = document.querySelector("#login-button");
-        const error = document.querySelector("#error") 
         if (username.value.match(/\D/)){
           error.innerHTML='Numbers only!!';
-          login.setAttribute("disabled",true);
-          login.setAttribute("style","background-color: #AAAAAA; color: #556B2F;");
+          $('#login-button').attr("disabled");
+          $('#login-button').attr("style","background-color: #AAAAAA; color: #556B2F;");
         } else {
           error.innerHTML='';
-          login.removeAttribute("disabled");
-          login.removeAttribute("style");
+          $('#login-button').removeAttr("disabled");
+          $('#login-button').removeAttr("style");
         }
       }
+      $('label').mouseover(function(event){
+        setTimeout(()=>{
+          const offset = $(this).position().left+$(this).width()/2;
+          $('.arrow').css('left',+ offset+'px');
+        },250);
+      });
       $("#login-button").click(function(event){
-        event.preventDefault();
-        if ('' === username.value || '' === password.value){
-          error.innerHTML = 'Please fill in something!';
-        } else {
-          error.innerHTML = '';
-          $('form').fadeOut(500);
-	        $('.wrapper').addClass('form-success');
+        if (typeof $('form').attr('action') === typeof undefined){
+          event.preventDefault();
+          if ('' === $('#username').val() || '' === $('password').val()){
+            error.innerHTML = 'Please fill in something!';
+          } else {
+            error.innerHTML = '';
+            $('form').fadeOut(500);
+            $('.wrapper').addClass('form-success');
+            $.post("login", {username:username.value, password: password.value,csrfmiddlewaretoken: '{{ csrf_token }}'}, function(data) {
+              setTimeout(()=>{
+                $('.wrapper').removeClass('form-success');
+                $('form').fadeIn(500);
+                if (data === '200'){
+                  $('form').attr('action','pay');
+                  $('#username').attr({id:'hours', placeholder: 'Hours', name:'hours'}).val('');
+                  $('#password').attr({type:'hidden', id:'month', name: 'month'}).val('');
+                  $('#login-button').html('Get PDF!');
+                  $('#monthSelector').show();
+                  $('.arrow').show();
+                  setTimeout(()=>{$('.arrow').css('left',$('label').eq(0).position().left+$('label').eq(0).width()/2+'px');},0);
+                } else {
+                  error.innerHTML = 'Wrong username or password!';
+                }
+              },1000)
+            });
+          }
         }
       });
     </script>

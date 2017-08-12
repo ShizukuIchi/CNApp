@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
+@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
 * {
   box-sizing: border-box;
   margin: 0;
@@ -94,6 +95,7 @@ body :-ms-input-placeholder {
 }
 
 .discriptions {
+  font-family: 'Noto Sans TC', sans-serif;
   position: relative;
   z-index: 2;
   border: 1px solid rgba(255, 255, 255, 0.4);
@@ -103,13 +105,15 @@ body :-ms-input-placeholder {
   display: block;
   float: left;
   font-size: 0px;
-  color: #53e3a6;
+  font-weight: 300;
+  text-shadow:#999 0.01em 0.01em 0.05em;
   transition-duration: .5s;  
   width: 0%;
   opacity: 0;
 }
 
 .discriptions-hover {
+  font-family: 'Noto Sans TC', sans-serif;
   position: relative;
   z-index: 2;
   border: 1px solid rgba(255, 255, 255, 0.4);
@@ -120,6 +124,8 @@ body :-ms-input-placeholder {
   display: block;
   float: left;
   font-size: 18px;
+  font-weight: 400;
+  text-shadow:#999 0.05em 0.05em 0.03em;
   color: white;
   transition-duration: .5s;  
   width: 0%;
