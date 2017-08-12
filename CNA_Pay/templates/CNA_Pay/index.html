@@ -12,14 +12,15 @@
         <h1>CNA Pay</h1>
         
         <form class="form" method="post">
-          {% csrf_token %}
-          <input type="text" placeholder="Username" id="username" name="username" onkeypress="checkUsername()" onkeydown="checkUsername()" onkeyup="checkUsername()" />
+   
+          <input type="text" placeholder="Username" id="username" name="username" onkeypress="checkInput()" onkeydown="checkInput()" onkeyup="checkInput()" />
           <input type="password" placeholder="Password" id="password" name="password"/>
           <div id="monthSelector" >
             <div class="arrowContainer"><div class="arrow"></div></div>
             {% for i in months %}<label for='month'>{{ i }}</label>{% if not forloop.last %}|{% endif %}{% endfor %}
           </div>
           <button type="submit" id="login-button">Login</button>
+          {% csrf_token %}
         </form>
         <span id="error"></span>
         <span style="position: absolute; right:0%; bottom:0%; color: #CCDDFF;">sh1zuku</span>
@@ -42,8 +43,8 @@
     <script>
       console.log('看屁，喝');
       const error = document.querySelector("#error");
-      const checkUsername = () => {
-        if (username.value.match(/\D/)){
+      const checkInput = () => {
+        if ($('input').eq(0).val().match(/\D/)){
           error.innerHTML='Numbers only!!';
           $('#login-button').attr("disabled");
           $('#login-button').attr("style","background-color: #AAAAAA; color: #556B2F;");
@@ -54,7 +55,9 @@
         }
       }
       $('label').mouseover(function(event){
+        const month = $(this).html();
         setTimeout(()=>{
+          $('#month').val(month);
           const offset = $(this).position().left+$(this).width()/2;
           $('.arrow').css('left',+ offset+'px');
         },250);
@@ -75,7 +78,7 @@
                 if (data === '200'){
                   $('form').attr('action','pay');
                   $('#username').attr({id:'hours', placeholder: 'Hours', name:'hours'}).val('');
-                  $('#password').attr({type:'hidden', id:'month', name: 'month'}).val('');
+                  $('#password').attr({type:'hidden', id:'month', name: 'month'}).val('1');
                   $('#login-button').html('Get PDF!');
                   $('#monthSelector').show();
                   $('.arrow').show();
