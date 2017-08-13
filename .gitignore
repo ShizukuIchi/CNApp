@@ -3,3 +3,4 @@
 *.pyc
 .env
 cna-pay
+db.sqlite3

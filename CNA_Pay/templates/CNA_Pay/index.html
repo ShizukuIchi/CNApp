@@ -13,7 +13,7 @@
         
         <form class="form" method="post">
    
-          <input type="text" placeholder="Username" id="username" name="username" onkeypress="checkInput()" onkeydown="checkInput()" onkeyup="checkInput()" />
+          <input type="text" placeholder="Username" id="username" name="username"  onkeyup="checkInput()" />
           <input type="password" placeholder="Password" id="password" name="password"/>
           <div id="monthSelector" >
             <div class="arrowContainer"><div class="arrow"></div></div>
@@ -43,10 +43,11 @@
     <script>
       console.log('看屁，喝');
       const error = document.querySelector("#error");
+      let reString = /^\d+$|^\d+\.\d+$/;  
       const checkInput = () => {
-        if ($('input').eq(0).val().match(/(?!\.)\D/)){
-          error.innerHTML='Numbers only!!';
-          $('#login-button').attr("disabled");
+        if ($('input').eq(0).val().match(reString) === null){
+          error.innerHTML='Fill in numbers!!';
+          $('#login-button').attr("disabled",true);
           $('#login-button').attr("style","background-color: #AAAAAA; color: #556B2F;");
         } else {
           error.innerHTML='';
@@ -63,11 +64,12 @@
         },250);
       });
       $("#login-button").click(function(event){
-        if (typeof $('form').attr('action') === typeof undefined){
+        if ('' === $('input').eq(0).val() || '' === $('#password').val()  || $('input').eq(0).val() === '0'){
           event.preventDefault();
-          if ('' === $('#username').val() || '' === $('password').val()){
-            error.innerHTML = 'Please fill in something!';
-          } else {
+          error.innerHTML = 'Please fill in something!';
+        } else if (typeof $('form').attr('action') === typeof undefined){
+          event.preventDefault(); 
+          if ($('input').eq(0).val().match(/^\d+$/) !== null){
             error.innerHTML = '';
             $('form').fadeOut(500);
             $('.wrapper').addClass('form-success');
@@ -90,12 +92,18 @@
                 }
               },800)
             });
+          } else {
+            error.innerHTML = 'Should not include dot!!';
           }
-        } else {
+        } else if ($('input').eq(0).val().match(/^\d+$|^\d+\.\d+$/) !== null){
           $('.wrapper').addClass('form-success');
           $('form').fadeOut(500);
+        } else {
+          event.preventDefault();
+          error.innerHTML='Bad input.';
         }
       });
     </script>
   </body>
 </html>
+
