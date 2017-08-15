@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <title>報薪水２.0 颯爽登場!</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image/ico" href="{% static "CNA_Pay/favicon.ico" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "CNA_Pay/style.css" %}">
+    <script src="{% static "CNA_Pay/jQuery2.1.3.js" %}"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <h1>CNApp SM</h1>
+        
+        <form class="form" method="post">
+          <input type="text" placeholder="Username" id="username" name="username" />
+          <input type="password" placeholder="Password" id="password" name="password"/>
+          <button type="submit" id="login-button">Login</button>
+          {% csrf_token %}
+        </form>
+        <span id="error"></span>
+        <span style="position: absolute; right:0%; bottom:0%; color: #CCDDFF;">sh1zuku</span>
+      </div>
+      <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    
+    </div>
+
+    <script>
+      console.log('看屁，喝');
+      const error = document.querySelector("#error");
+      $("#login-button").click(function(event){
+        event.preventDefault();
+        if ('' === $('input').eq(0).val() || '' === $('#password').val()){
+          error.innerHTML = 'Please fill in something!';
+        } else {
+          $('form').fadeOut(500);
+          $('.wrapper').addClass('form-success');
+          $.post("search", {username:username.value, password: password.value,csrfmiddlewaretoken: '{{ csrf_token }}'}, function(data) {
+            setTimeout(()=>{
+              $('.wrapper').removeClass('form-success');
+              $('form').fadeIn(500);
+              error.innerHTML = data;
+            },800)
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
+

@@ -9,12 +9,12 @@
   <body>
     <div class="wrapper">
       <div class="container">
-        <h1>CNAPZ</h1>
+        <h1>CNApp</h1>
         
         <div id="options" class="options">
           <button onclick="goToApp('cna_pay')" onmouseout="handleAppHover('')" onmouseover="handleAppHover('cna_pay')">CNA Pay</button>
           <button onclick="goToApp('cna_up')" onmouseout="handleAppHover('')" onmouseover="handleAppHover('cna_up')">CNA UP</button>
-          <button onclick="goToApp('cna_saveMoney')" onmouseout="handleAppHover('')" onmouseover="handleAppHover('cna_saveMoney')">CNA SaveMoney</button>
+          <button onclick="goToApp('cna_savemoney')" onmouseout="handleAppHover('')" onmouseover="handleAppHover('cna_saveMoney')">CNA SaveMoney</button>
         </div>
         <div id="discriptions" class="discriptions">
         </div>
@@ -45,18 +45,21 @@
           case 'cna_pay':
             discription.setAttribute('class','discriptions-hover')
             discription.innerHTML = `
-            太多薪水需要報嗎?
-            賺錢需要這麼累嗎?
-            <br/>
-            填入時數，自動報薪水。`
+              太多薪水需要報嗎?
+              賺錢需要這麼累嗎?
+              <br/>
+              填入時數，自動報薪水。`;
             break;
           case 'cna_up':
             discription.setAttribute('class','discriptions-hover')
-            discription.innerHTML = 'Todo~' ;
+            discription.innerHTML = `Todo~`;
             break;
           case 'cna_saveMoney':
             discription.setAttribute('class','discriptions-hover')
-            discription.innerHTML = 'Todo~' ;
+            discription.innerHTML = `
+              啊！又忘記薪水信<br/>
+              啊！又忘記值班信(還有會議信)<br/>
+              動動手指，輕鬆賺133。`;
             break;  
           default:
             discription.setAttribute('class','discriptions')

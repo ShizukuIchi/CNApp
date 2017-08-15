@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'CNA_Pay',
+    'cna_savemoney',
 ]
 
 MIDDLEWARE = [
