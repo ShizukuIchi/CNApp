@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^', include('home.urls')),
     url(r'^cna_pay/', include('CNA_Pay.urls')),
     url(r'^cna_savemoney/', include('cna_savemoney.urls')),
+    url(r'^cna_up/', include('cna_up.urls')),
     # url(r'^admin/', admin.site.urls),
 ]

@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render
 from django.http import HttpResponse
+import searcher
 
 def index(request):
     return render(request, 'cna_savemoney/index.html')
@@ -9,8 +10,8 @@ def index(request):
 def search(request):
     username = str(request.POST.get("username", ""))
     password = str(request.POST.get("password", ""))
-    # noticeList = searcher.start(username,password)
-    return HttpResponse('fuck') 
+    notice = searcher.start(username,password)
+    return HttpResponse(notice)
 
 def login(request):
     return HttpResponse('shit') 

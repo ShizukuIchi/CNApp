@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'home',
     'CNA_Pay',
     'cna_savemoney',
+    'cna_up',
 ]
 
 MIDDLEWARE = [

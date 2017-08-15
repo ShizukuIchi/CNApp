@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>報薪水２.0 颯爽登場!</title>
+    <title>又賺了$133</title>
     {% load static %}
     <link rel="shortcut icon" type="image/ico" href="{% static "CNA_Pay/favicon.ico" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "CNA_Pay/style.css" %}">
@@ -32,7 +32,6 @@
         <li></li>
         <li></li>
       </ul>
-    
     </div>
 
     <script>
@@ -40,6 +39,7 @@
       const error = document.querySelector("#error");
       $("#login-button").click(function(event){
         event.preventDefault();
+        error.innerHTML = '';
         if ('' === $('input').eq(0).val() || '' === $('#password').val()){
           error.innerHTML = 'Please fill in something!';
         } else {
@@ -50,7 +50,7 @@
               $('.wrapper').removeClass('form-success');
               $('form').fadeIn(500);
               error.innerHTML = data;
-            },800)
+            },0)
           });
         }
       });
