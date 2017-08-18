@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import searcher
 
 def index(request):
@@ -11,7 +11,7 @@ def search(request):
     username = str(request.POST.get("username", ""))
     password = str(request.POST.get("password", ""))
     notice = searcher.start(username,password)
-    return HttpResponse(notice)
+    return JsonResponse({'data':notice})
 
 def login(request):
     return HttpResponse('shit') 

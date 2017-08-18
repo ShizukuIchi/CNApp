@@ -1,4 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
+@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -111,6 +113,80 @@ form button {
 form button:hover {
   background-color: #f5f7f9;
 }
+
+.overlay {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.overlay:before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+
+.popup {
+  display: inline-block;
+  vertical-align: middle;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+  opacity: .87;
+}
+
+.popup h2 {
+  margin-bottom: 10px;
+  color: rgba(0,0,0,.87);
+  font-weight: 600;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.popup h2 span {
+  color: rgba(0,213,8,.87);
+  font-weight: 600;
+}
+
+.popup .close {
+  cursor: pointer;
+  position: absolute;
+  top: 2.5px;
+  right: 10px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #53e3a6;
+}
+.popup .close:hover {
+  color: orange;
+}
+.popup .content {
+  color: black;
+  max-height: 30%;
+  overflow: auto;
+  font-weight: 300;
+  font-size: 18px;
+  text-shadow:#999 0.01em 0.01em 0.05em;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
 
 .button-error {
   background-color: #DDDDDD;

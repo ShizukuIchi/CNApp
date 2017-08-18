@@ -39,13 +39,17 @@ def start(username,password):
     allTitles = titles2[1:-1]+titles[3:]
     payment = []
     notice = []
+    output = ''
 
     for title in allTitles: 
-        if u'月份值班信' in title or u'月值班信' in title or u'月份網管會議' in title or u'月網管會議' in title:
+        text = re.search(u'(.)(月|月份)(網管)?(值班|會議)(信|時間)?',title)
+        if text:
+            for i in range(1,6):
+                if text.group(i):
+                    output += text.group(i)
             if ' r ' not in title[:15] and u'備 忘 錄' not in title: 
-                text = re.search(u'◇.* (.*)(月|月份)(網管會議|值班信)',title)
-                if text: 
-                    notice.append(text.group(1)+text.group(2)+text.group(3))
+                notice.append(output)
+            output = ''
         elif u'工讀金' in title: 
             payment.append(title)
     if len(payment) > 0: 
