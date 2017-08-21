@@ -41,6 +41,8 @@ def pay(request):
 
     #get seqenceNumber and total paid days
     sequence,days = requester.submitPayment(thisYear,payMonth,paidDays)
+    if sequence is False:
+        return HttpResponse('Fail to add hours.')
 
     #True if download pdf sucessfully
     if(requester.getPDF(sequence,days,payload['staff_cd'])):
@@ -49,3 +51,10 @@ def pay(request):
             response['Content-Disposition'] = 'filename='+str(request.POST.get("username", ""))+'.pdf'
             return response
     pdf.closed
+
+def upload(request):
+    filename = ''
+    username = ''
+    password = ''
+    return HttpResponse(requester.uploader(filename, username, password))
+ 

@@ -125,8 +125,10 @@ def submitPayment(year,month,days):
         checkbox+=1
         
     res = s.post('http://mis.cc.ccu.edu.tw/parttime/print_check.php',data=payload)
-    seq = str(re.search(r'\d{10}',res.content).group(0))
-    return seq,totalCB
+    if re.search(r'\d{10}',res.content):
+        seq = str(re.search(r'\d{10}',res.content).group(0))
+        return seq,totalCB
+    return False,False
 
 def getPDF(seq,totalCB,name):
     payload = {
@@ -144,3 +146,45 @@ def getPDF(seq,totalCB,name):
         return True
     else:
         return False
+
+def uploader(filename, username, password):
+
+    def getCRSF(content):
+        soup = BeautifulSoup(content,'html.parser')
+        inputs = soup.find_all("input")
+        for i in inputs:
+            if i['name'] == "_csrf":
+                return i["value"]
+    import os
+    from requests_toolbelt.multipart.encoder import MultipartEncoder
+
+    if not os.path.isfile(filename):
+        return 'Invalid file path'
+
+    s = requests.Session()
+    url = 'https://www.dorm.ccu.edu.tw/admini/site/login'
+    res = s.get(url)
+    csrf = getCRSF(res.content)
+
+    login_data = {
+        "_csrf": csrf,
+        "LoginForm[username]": username,
+        "LoginForm[password]": password,
+        "LoginForm[rememberMe]":"1",
+        "login-button:": ""
+    }
+    s.post(url, data=login_data)
+
+    url = 'https://www.dorm.ccu.edu.tw/admini/salary/index'
+    res = s.get(url)
+    csrf = getCRSF(res.content)
+
+    multipart_data = MultipartEncoder(
+        fields=(
+                ('_csrf', csrf), 
+                ('Salary[pdfFile]', ''),
+                ('Salary[pdfFile]', (filename, open(filename, 'rb'), 'application/pdf')),
+            )
+        )
+    res = s.post(url, data=multipart_data, headers={'Content-Type': multipart_data.content_type})
+    return res.status_code
