@@ -13,8 +13,8 @@
         
         <form class="form" method="post">
    
-          <input type="text" placeholder="Username" id="username" name="username"  onkeyup="checkInput()" />
-          <input type="password" placeholder="Password" id="password" name="password"/>
+          <input type="text" placeholder="SSO Username" id="username" name="username"  onkeyup="checkInput()" />
+          <input type="password" placeholder="SSO Password" id="password" name="password"/>
           <div id="monthSelector" >
             <div class="arrowContainer"><div class="arrow"></div></div>
             {% for i in months %}<label for='month'>{{ i }}</label>{% if not forloop.last %}|{% endif %}{% endfor %}
