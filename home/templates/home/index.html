@@ -2,9 +2,9 @@
   <head>
     <title>CNAPZ</title>
     {% load static %}
-    <link rel="shortcut icon" type="image/ico" href="{% static "home/favicon.ico" %}"/>
+    <link rel="shortcut icon" type="image/ico" href="{% static "favicon.ico" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "home/style.css" %}">
-    <script src="{% static "home/jQuery2.1.3.js" %}"></script>
+    <script src="{% static "jQuery2.1.3.js" %}"></script>
   </head>
   <body>
     <div class="wrapper">
@@ -13,7 +13,7 @@
         
         <div id="options" class="options">
           <button onclick="goToApp('cna_pay')" onmouseout="handleAppHover('')" onmouseover="handleAppHover('cna_pay')">CNA Pay</button>
-          <button onclick="goToApp('cna_pay/upload')" onmouseout="handleAppHover('')" onmouseover="handleAppHover('cna_up')">CNA UP</button>
+          <button onclick="goToApp('cna_up')" onmouseout="handleAppHover('')" onmouseover="handleAppHover('cna_up')">CNA UP</button>
           <button onclick="goToApp('cna_savemoney')" onmouseout="handleAppHover('')" onmouseover="handleAppHover('cna_saveMoney')">CNA SaveMoney</button>
         </div>
         <div id="discriptions" class="discriptions">
@@ -45,14 +45,15 @@
           case 'cna_pay':
             discription.setAttribute('class','discriptions-hover')
             discription.innerHTML = `
-              太多薪水需要報嗎?
-              賺錢需要這麼累嗎?
-              <br/>
+              太多薪水需要報嗎?<br/>
+              賺錢需要這麼累嗎?<br/>
               填入時數，自動報薪水。`;
             break;
           case 'cna_up':
             discription.setAttribute('class','discriptions-hover')
-            discription.innerHTML = `Todo~`;
+            discription.innerHTML = `
+              連工讀單都懶得上傳...?<br/>
+              可以再懶一點`;
             break;
           case 'cna_saveMoney':
             discription.setAttribute('class','discriptions-hover')

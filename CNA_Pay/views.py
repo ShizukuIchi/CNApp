@@ -52,9 +52,4 @@ def pay(request):
             return response
     pdf.closed
 
-def upload(request):
-    filename = ''
-    username = ''
-    password = ''
-    return HttpResponse(requester.uploader(filename, username, password))
  

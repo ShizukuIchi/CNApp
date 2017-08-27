@@ -1,0 +1,104 @@
+<html>
+  <head>
+    <title>自動上傳PDF</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image/ico" href="{% static "favicon.ico" %}"/>
+    <script src="{% static "jQuery2.1.3.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "cna_up/style.css" %}">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <h1>CNApp UP</h1>
+        <form class="form" method="post">
+          <input type="text" placeholder="Username" id="username" name="username" />
+          <input type="password" placeholder="Password" id="password" name="password"/>
+          <button type="submit" id="login-button">Login</button>
+          {% csrf_token %}
+        </form>
+        <span id="error"></span>
+        <span style="position: absolute; right:0%; bottom:0%; color: #CCDDFF;">sh1zuku</span>
+
+      <div class="overlay">
+        <div class="popup">
+          <h2 id="popupMessage"></h2>
+          <div class="close">×</div>
+        </div>
+      </div>
+
+      </div>
+      <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+
+    <script>
+      console.log('看屁，喝');
+      const error = document.querySelector("#error");
+      $("#login-button").click(function(event){
+        event.preventDefault();
+        error.innerHTML = '';
+        if ($('#filename').val() === undefined){
+          if ('' === $('input').eq(0).val() || '' === $('#password').val()){
+            error.innerHTML = 'Please fill in something!';
+          } else {
+            $('form').fadeOut(500);
+            $('.wrapper').addClass('form-success');
+            $.post("login", 
+              {
+                username: username.value,
+                password: password.value,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+              }, function(res) {
+                if (res === '200'){
+                  $('form').prepend(`<input type="text" id="filename" placeholder="Filename" name="filename" />`);
+                  $('#username').hide();
+                  $('#password').hide();
+                } else {
+                  error.innerHTML = 'Invalid username or password'
+                }
+                setTimeout(()=>{
+                  $('.wrapper').removeClass('form-success');
+                  $('form').fadeIn(500);
+                },0)
+            });
+          }
+        } else {
+          $('form').fadeOut(500);
+          $('.wrapper').addClass('form-success');
+          $.post("upload", 
+            {
+              filename: filename.value,
+              username: username.value,
+              password: password.value,
+              csrfmiddlewaretoken: '{{ csrf_token }}'
+            }, function(res) {
+              if (res === '200'){
+                $('#popupMessage').html('上傳成功 <span style="color: green;">✔</span>');
+              } else {
+                $('#popupMessage').html('上傳失敗 <span style="color: red;">✘</span>');
+              }
+              $(".overlay").addClass('active');
+              setTimeout(()=>{
+                $('.wrapper').removeClass('form-success');
+                $('form').fadeIn(500);
+              },0)
+          });
+        }
+      });
+      $('.close').click(function(){
+        location.href = '/';
+      });
+    </script>
+  </body>
+</html>
+
