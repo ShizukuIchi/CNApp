@@ -12,13 +12,13 @@
         <h1>CNApp Pay</h1>
         
         <form class="form" method="post">
-   
-          <input type="text" placeholder="SSO Username" id="username" name="username"  onkeyup="checkInput()" />
-          <input type="password" placeholder="SSO Password" id="password" name="password"/>
           <div id="monthSelector" >
             <div class="arrowContainer"><div class="arrow"></div></div>
             {% for i in months %}<label for='month'>{{ i }}</label>{% if not forloop.last %}|{% endif %}{% endfor %}
           </div>
+          <input type="text" placeholder="SSO Username" id="username" name="username"  onkeyup="checkInput()" />
+          <input type="password" placeholder="SSO Password" id="password" name="password"/>
+          
           <button type="submit" id="login-button">Login</button>
           {% csrf_token %}
         </form>
@@ -57,10 +57,50 @@
       }
       $('label').mouseover(function(event){
         const month = $(this).html();
+        $('#login-button').css('color','white')
         setTimeout(()=>{
           $('#month').val(month);
           const offset = $(this).position().left+$(this).width()/2;
           $('.arrow').css('left',+ offset+'px');
+          switch(month) {
+          case '1':
+            $('#login-button').html('Get January Salary!');
+            break;
+          case '2':
+            $('#login-button').html('Get Fabruary Salary!');
+            break;
+          case '3':
+            $('#login-button').html('Get March Salary!');
+            break;
+          case '4':
+            $('#login-button').html('Get April Salary!');
+            break;
+          case '5':
+            $('#login-button').html('Get May Salary!');
+            break;
+          case '6':
+            $('#login-button').html('Get June Salary!');
+            break;
+          case '7':
+            $('#login-button').html('Get July Salary!');
+            break;
+          case '8':
+            $('#login-button').html('Get August Salary!');
+            break;
+          case '9':
+            $('#login-button').html('Get September Salary!');
+            break;
+          case '10':
+            $('#login-button').html('Get October Salary!');
+            break;
+          case '11':
+            $('#login-button').html('Get November Salary!');
+            break;
+          case '12':
+            $('#login-button').html('Get December Salary!');
+            break;
+          }
+          $('#login-button').css('color','#53e3a6')
         },250);
       });
       $("#login-button").click(function(event){
@@ -83,7 +123,7 @@
                   $('form').append(`<input type="hidden" name="password" value="${$('#password').val()}"/>`)
                   $('#username').attr({id:'hours', placeholder: 'Hours', name:'hours'}).val('');
                   $('#password').attr({type:'hidden', id:'month', name: 'month'}).val('1');
-                  $('#login-button').html('Get PDF!');
+                  $('#login-button').html('Get January Salary!');
                   $('#monthSelector').show();
                   $('.arrow').show();
                   setTimeout(()=>{$('.arrow').css('left',$('label').eq(0).position().left+$('label').eq(0).width()/2+'px');},0);
