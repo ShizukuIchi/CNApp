@@ -88,6 +88,7 @@ def addHours(year,month,Days,hours):
     return paidDays
 
 def addHours4(year,month,Days,hours):
+    days = list(Days)
     payload={
     'yy':year,
     'mm':month,
