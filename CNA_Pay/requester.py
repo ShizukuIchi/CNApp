@@ -35,9 +35,9 @@ def getAlreadyPaidDays(year,month):
     reString = '(?<=' + month + u'月)\d+(?=日)'
     return re.findall(reString,soup.text)
 
-def addHours(year,month,days,hours):
+def addHours(year,month,Days,hours):
     s.get('http://mis.cc.ccu.edu.tw/parttime/control2.php')
-    
+    days = list(Days)
     if len(month) == 1:
         month = '0'+month
     payload={
@@ -54,6 +54,10 @@ def addHours(year,month,days,hours):
     }
     paidDays=[]
     while hours > 0:
+        if len(days) is 0:
+            hours = addHours4(year, month, Days, hours)
+            if hours == 0:
+                break
         d = days[randint(0, len(days)-1)]
         payload['dd'] = d
         paidDays.append(d)
@@ -82,6 +86,55 @@ def addHours(year,month,days,hours):
             hours-=0.5
     res = s.get('http://mis.cc.ccu.edu.tw/parttime/todb.php')
     return paidDays
+
+def addHours4(year,month,Days,hours):
+    payload={
+    'yy':year,
+    'mm':month,
+    'dd':'16',
+    'type':u'P012電子計算機中心資源管理組',
+    'shour':'08',
+    'smin':'00',
+    'ehour':'12',
+    'emin':'00',
+    'workin':u'宿網諮詢',
+    'sid':''
+    }
+    while hours > 0:
+        d = days[randint(0, len(days)-1)]
+        payload['dd'] = d
+        days.remove(d)
+        if hours >= 4:
+            s.post('http://mis.cc.ccu.edu.tw/parttime/next.php',data=payload)
+            hours -= 4
+        elif hours >= 3:
+            payload['ehour'] = '11'
+            if hours == 3.5:
+                payload['emin'] = '30'
+                hours -= 0.5
+            s.post('http://mis.cc.ccu.edu.tw/parttime/next.php',data=payload)
+            hours -= 3
+        elif hours >=2:
+            payload['ehour'] = '10'
+            if hours == 2.5:
+                payload['emin'] = '30'
+                hours -= 0.5
+            s.post('http://mis.cc.ccu.edu.tw/parttime/next.php',data=payload)
+            hours -=2
+        elif hours >=1:
+            payload['ehour'] = '09'
+            if hours == 1.5:
+                payload['emin'] = '30'
+                hours -= 0.5
+            s.post('http://mis.cc.ccu.edu.tw/parttime/next.php',data=payload)
+            hours -=1
+        elif hours >0:
+            payload['ehour'] = '08'
+            payload['emin'] = '30'
+            s.post('http://mis.cc.ccu.edu.tw/parttime/next.php',data=payload)
+            hours-=0.5
+    return hours
+
 
 def submitPayment(year,month,days):
     res = s.get('http://mis.cc.ccu.edu.tw/parttime/print_sel.php')
