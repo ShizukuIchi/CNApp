@@ -68,6 +68,27 @@
             break;
         }
       }
+      class milu{
+        constructor(){
+          this.x = 0;
+          this.y = Math.random()*(window.innerHeight-467);
+          this.ex = window.innerWidth;
+          this.ey = Math.random()*window.innerHeight;
+        }
+        gen(){
+          m = document.createElement('img');
+          m.src = "{% static 'home/milu.png' %}"
+          m.style = `position: fixed;top: ${this.y}px; left:${this.ex}px; animation: milu 2s linear;`
+          document.querySelector('body').appendChild(m)
+        }
+      }
+      setInterval(()=>{
+        m = new milu();
+        m.gen();
+        setTimeout(()=>{
+          document.querySelector('body').removeChild(m);
+        },2000)
+      },3000);
     </script>
   </body>
 </html>

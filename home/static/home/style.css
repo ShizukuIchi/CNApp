@@ -231,3 +231,7 @@ body :-ms-input-placeholder {
     transform: translateY(-700px) rotate(600deg);
   }
 }
+
+@keyframes milu {
+  0% { left:-278px; }
+}
