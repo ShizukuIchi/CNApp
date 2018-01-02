@@ -153,6 +153,12 @@ form button:hover {
   background-color: #DDDDDD;
 }
 
+@media (max-width: 768px){
+  form #monthSelector label{
+    padding: 0 5px 5px;
+  }
+}
+
 .bg-bubbles {
   position: absolute;
   top: 0;

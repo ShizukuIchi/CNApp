@@ -6,18 +6,24 @@ def getChineseThisYear():
     return datetime.today().year-1911
 
 def getThisMonthHolidaysFromFile(month,fileName):
-    holidays = []
-    thisMonthHolidays = []
-    with open(fileName, 'r') as f:
-        reader = csv.reader(f, delimiter='\n')
-        holidaysDetailList = list(reader)
-        for l in holidaysDetailList:
-            holidays.append(l[0].split(',')[0])
-    for date in holidays:
-        ymd = date.split('/')
-        if ymd[1] == month:
-            thisMonthHolidays.append(ymd[2])
-    return thisMonthHolidays
+    # holidays = []
+    # thisMonthHolidays = []
+    # with open(fileName, 'r') as f:
+    #     reader = csv.reader(f, delimiter='\n')
+    #     holidaysDetailList = list(reader)
+    #     for l in holidaysDetailList:
+    #         holidays.append(l[0].split(',')[0])
+    # for date in holidays:
+    #     ymd = date.split('/')
+    #     if ymd[1] == month:
+    #         thisMonthHolidays.append(ymd[2])
+    # return thisMonthHolidays
+    import json
+    f = open(fileName, encoding = 'utf8')
+    data = json.load(f)["records"]
+    f.close()
+    holidays = list(map(lambda d: d.split('/')[2], filter(lambda ymd: ymd.split('/')[1] == month ,[holiday["date"] for holiday in data])))
+    return holidays
 
 def getPayableDays(month,holidays):
     days = []
