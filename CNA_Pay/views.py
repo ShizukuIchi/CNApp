@@ -22,7 +22,7 @@ def pay(request):
     payMonth = str(request.POST.get("month", ""))
     payHours = float(request.POST.get("hours", ""))
 
-    holidays = dating.getThisMonthHolidaysFromFile(payMonth,'holidays.csv')
+    holidays = dating.getThisMonthHolidaysFromFile(payMonth,'holidays.json')
     payableDays = dating.getPayableDays(payMonth,holidays)
         
     payload = {}

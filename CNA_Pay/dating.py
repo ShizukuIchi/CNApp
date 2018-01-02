@@ -1,6 +1,5 @@
 from calendar import monthrange
 from datetime import datetime
-import csv
 
 def getChineseThisYear():
     return datetime.today().year-1911
@@ -19,7 +18,8 @@ def getThisMonthHolidaysFromFile(month,fileName):
     #         thisMonthHolidays.append(ymd[2])
     # return thisMonthHolidays
     import json
-    f = open(fileName, encoding = 'utf8')
+    import codecs
+    f = codecs.open(fileName, encoding = 'utf8')
     data = json.load(f)["records"]
     f.close()
     holidays = list(map(lambda d: d.split('/')[2], filter(lambda ymd: ymd.split('/')[1] == month ,[holiday["date"] for holiday in data])))
