@@ -44,7 +44,7 @@ def addHours(year,month,Days,hours):
     'yy':year,
     'mm':month,
     'dd':'16',
-    'type':u'P012電子計算機中心資源管理組',
+    'type':u'P110資訊處資源管理組',
     'shour':'19',
     'smin':'00',
     'ehour':'22',
@@ -93,7 +93,7 @@ def addHours4(year,month,Days,hours):
     'yy':year,
     'mm':month,
     'dd':'16',
-    'type':u'P012電子計算機中心資源管理組',
+    'type':u'P110資訊處資源管理組',
     'shour':'08',
     'smin':'00',
     'ehour':'12',
@@ -140,7 +140,7 @@ def addHours4(year,month,Days,hours):
 def submitPayment(year,month,days):
     res = s.get('http://mis.cc.ccu.edu.tw/parttime/print_sel.php')
     payload = {
-    'unit_cd1':'P012',
+    'unit_cd1':'P110',
     'sy':year,
     'sm':month,
     'sd':'01',
