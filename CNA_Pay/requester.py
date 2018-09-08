@@ -56,6 +56,8 @@ def addHours(year,month,Days,hours):
     while hours > 0:
         if len(days) is 0:
             hours = addHours4(year, month, Days, hours)
+            if hours > 0:
+                return paidDays, hours
             if hours == 0:
                 break
         d = days[randint(0, len(days)-1)]
@@ -85,7 +87,7 @@ def addHours(year,month,Days,hours):
             s.post('http://mis.cc.ccu.edu.tw/parttime/next.php',data=payload)
             hours-=0.5
     res = s.get('http://mis.cc.ccu.edu.tw/parttime/todb.php')
-    return paidDays
+    return paidDays, hours
 
 def addHours4(year,month,Days,hours):
     days = list(Days)
@@ -102,6 +104,8 @@ def addHours4(year,month,Days,hours):
     'sid':''
     }
     while hours > 0:
+        if len(days) is 0:
+            break
         d = days[randint(0, len(days)-1)]
         payload['dd'] = d
         days.remove(d)

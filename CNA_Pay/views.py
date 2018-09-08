@@ -37,7 +37,9 @@ def pay(request):
             payableDays.remove(d)
 
     #add hours to database get paid days list
-    paidDays = requester.addHours(thisYear,payMonth,payableDays,payHours)
+    paidDays, leftHours = requester.addHours(thisYear,payMonth,payableDays,payHours)
+    if leftHours > 0:
+        return HttpResponse('Fail to add hours: ' + str(leftHours) + ' hours remained, please declare your salary manually.')
 
     #get seqenceNumber and total paid days
     sequence,days = requester.submitPayment(thisYear,payMonth,paidDays)
