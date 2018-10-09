@@ -1,24 +1,26 @@
 <html>
-  <head>
-    <title>又賺了$133×ｎ</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
-    <link rel="shortcut icon" type="image/ico" href="{% static "favicon.ico" %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static "cna_savemoney/style.css" %}">
-    <script src="{% static "jQuery2.1.3.js" %}"></script>
-  </head>
-  <body>
-    <div class="wrapper">
-      <div class="container">
-        <h1>CNApp SM</h1>
-        <form class="form" method="post">
-          <input type="text" placeholder="CNA Username" id="username" name="username" />
-          <input type="password" placeholder="CNA Password" id="password" name="password"/>
-          <button type="submit" id="login-button">Login</button>
-          {% csrf_token %}
-        </form>
-        <span id="error"></span>
-        <span style="position: absolute; right:0%; bottom:0%; color: #CCDDFF;">sh1zuku</span>
+
+<head>
+  <title>又賺了$140×ｎ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <link rel="shortcut icon" type="image/ico" href="{% static " favicon.ico" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static " cna_savemoney/style.css" %}">
+  <script src="{% static " jQuery2.1.3.js" %}"></script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <h1>CNApp SM</h1>
+      <form class="form" method="post">
+        <input type="text" placeholder="CNA Username" id="username" name="username" />
+        <input type="password" placeholder="CNA Password" id="password" name="password" />
+        <button type="submit" id="login-button">Login</button>
+        {% csrf_token %}
+      </form>
+      <span id="error"></span>
+      <span style="position: absolute; right:0%; bottom:0%; color: #CCDDFF;">sh1zuku</span>
 
       <div class="overlay">
         <div class="popup">
@@ -28,53 +30,53 @@
         </div>
       </div>
 
-      </div>
-      <ul class="bg-bubbles">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
     </div>
+    <ul class="bg-bubbles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
 
-    <script>
-      console.log('看屁，喝');
-      const error = document.querySelector("#error");
-      $("#login-button").click(function(event){
-        event.preventDefault();
-        error.innerHTML = '';
-        if ('' === $('input').eq(0).val() || '' === $('#password').val()){
-          error.innerHTML = 'Please fill in something!';
-        } else {
-          $('form').fadeOut(500);
-          $('.wrapper').addClass('form-success');
-          $.post("search", {username:username.value, password: password.value,csrfmiddlewaretoken: '{{ csrf_token }}'}, function(res) {
-            let content = '';
-            let count = 0;
-            res.data.forEach(function(element) {
-              content += (element + '<br/>') 
-              count += 1;
-            }, this);
-            $(".content").html(content);
-            $("#earn").html(' '+count*140+' ');
-            setTimeout(()=>{
-              $(".overlay").addClass('active');
-              $('.wrapper').removeClass('form-success');
-              $('form').fadeIn(500);
-            },0)
-          });
-        }
-      });
-      $('.close').click(function(){
-        $('.overlay').removeClass('active');
-      });
-    </script>
-  </body>
+  <script>
+    console.log('看屁，喝');
+    const error = document.querySelector("#error");
+    $("#login-button").click(function (event) {
+      event.preventDefault();
+      error.innerHTML = '';
+      if ('' === $('input').eq(0).val() || '' === $('#password').val()) {
+        error.innerHTML = 'Please fill in something!';
+      } else {
+        $('form').fadeOut(500);
+        $('.wrapper').addClass('form-success');
+        $.post("search", { username: username.value, password: password.value, csrfmiddlewaretoken: '{{ csrf_token }}' }, function (res) {
+          let content = '';
+          let count = 0;
+          res.data.forEach(function (element) {
+            content += (element + '<br/>')
+            count += 1;
+          }, this);
+          $(".content").html(content);
+          $("#earn").html(' ' + count * 140 + ' ');
+          setTimeout(() => {
+            $(".overlay").addClass('active');
+            $('.wrapper').removeClass('form-success');
+            $('form').fadeIn(500);
+          }, 0)
+        });
+      }
+    });
+    $('.close').click(function () {
+      $('.overlay').removeClass('active');
+    });
+  </script>
+</body>
+
 </html>
-
