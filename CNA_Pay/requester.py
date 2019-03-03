@@ -160,7 +160,7 @@ def submitPayment(year,month,days):
     #submit payment
     payload={
         'chka':'off',
-        'hour_money':'140',
+        'hour_money':'150',
         'sutype':'1',
         'iswork':'0',
         'emp_type':'1',
